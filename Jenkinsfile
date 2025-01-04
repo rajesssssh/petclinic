@@ -1,4 +1,4 @@
-@Library('my-shared-library@main') _
+@Library('my-shared-library@main') _ 
 
 pipeline {
     agent { label 'slave2' }
@@ -10,65 +10,10 @@ pipeline {
     }
 
     stages {
-        stage('Checkout Code') {
+        stage('pipeline1') {
             steps {
-                checkoutCode()
+                pipeline1()
             }
-        }
-
-        stage('Set up Java 17') {
-            steps {
-                setupJava()
-            }
-        }
-
-        stage('Set up Maven') {
-            steps {
-                setupMaven()
-            }
-        }
-
-        stage('Build with Maven') {
-            steps {
-                buildProject()
-            }
-        }
-
-        stage('Upload Artifact') {
-            steps {
-                echo 'Uploading artifact...'
-                archiveArtifacts artifacts: 'target/petclinic-0.0.1-SNAPSHOT.jar', allowEmptyArchive: true
-            }
-        }
-
-        stage('Run Application') {
-            steps {
-                runApplication()
-            }
-        }
-
-        stage('Validate App is Running') {
-            steps {
-                validateApp()
-            }
-        }
-
-        stage('keep2mins') {
-            steps {
-                keep2minsruninng()
-            }
-        }
-
-        stage('Gracefully Stop Spring Boot App') {
-            steps {
-                stopApplication()
-            }
-        }
-    }
-
-    post {
-        always {
-            cleanup()
-        }
-    }
+        }       
+}
 }
