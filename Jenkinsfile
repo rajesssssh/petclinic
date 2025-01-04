@@ -15,5 +15,10 @@ pipeline {
                 pipeline1()
             }
         }       
+ post {
+        always {
+            cleanup()
+        }
+    }
 }
-}
+
