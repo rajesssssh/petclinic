@@ -53,6 +53,12 @@ pipeline {
             }
         }
 
+        stage('keep2mins') {
+            steps {
+                keep2minsruninng()
+            }
+        }
+
         stage('Gracefully Stop Spring Boot App') {
             steps {
                 stopApplication()
