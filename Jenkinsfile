@@ -12,63 +12,63 @@ pipeline {
     stages {
         stage('Checkout Code') {
             steps {
-                pipeline1.check_out()
+                pipeline1.checkout()
             }
         }
 
         stage('Set up Java 1') {
             steps {
-                pipeline1.setup_java()
+                pipeline1.setupjava()
             }
         }
 
         stage('Set up Maven') {
             steps {
-                pipeline1.setup_maven()
+                pipeline1.setupmaven()
             }
         }
 
         stage('Build with Maven') {
             steps {
-                pipeline1.setup_build()
+                pipeline1.setupbuild()
             }
         }
 
         stage('Upload Artifact') {
             steps {
                 echo 'Uploading artifact...'
-                pipeline1.upload_artifact(String artifactPath)
+                pipeline1.uploadartifact(String artifactPath)
             }
         }
 
         stage('Run Application') {
             steps {
-                pipeline1.run_application()
+                pipeline1.runapplication()
             }
         }
 
         stage('Validate App is Running') {
             steps {
-                pipeline1.validate_app()
+                pipeline1.validateapp()
             }
         }
 
         stage('Keeping application up for 2 mins') {
             steps {
-                pipeline1.keep_app()
+                pipeline1.keepapp()
             }
         }
 
         stage('Gracefully Stop Spring Boot App') {
             steps {
-                pipeline1.stop_app()
+                pipeline1.stopapp()
             }
         }
     }
 
     post {
         always {
-            pipeline1.clean_app() 
+            pipeline1.cleanapp() 
 		}
     }
 }
