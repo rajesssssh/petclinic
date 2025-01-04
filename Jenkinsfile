@@ -12,63 +12,57 @@ pipeline {
     stages {
         stage('Checkout Code') {
             steps {
-                pipeline1.check_out()
+                checkoutCode()
             }
         }
 
-        stage('Set up Java 1') {
+        stage('Set up Java 17') {
             steps {
-                pipeline1.setup_java()
+                setupJava()
             }
         }
 
         stage('Set up Maven') {
             steps {
-                pipeline1.setup_maven()
+                setupMaven()
             }
         }
 
         stage('Build with Maven') {
             steps {
-                pipeline1.setup_build()
+                buildProject()
             }
         }
 
         stage('Upload Artifact') {
             steps {
                 echo 'Uploading artifact...'
-                pipeline1.upload_artifact(String artifactPath)
+                archiveArtifacts artifacts: 'target/petclinic-0.0.1-SNAPSHOT.jar', allowEmptyArchive: true
             }
         }
 
         stage('Run Application') {
             steps {
-                pipeline1.run_application()
+                runApplication()
             }
         }
 
         stage('Validate App is Running') {
             steps {
-                pipeline1.validate_app()
-            }
-        }
-
-        stage('Keeping application up for 2 mins') {
-            steps {
-                pipeline1.keep_app()
+                validateApp()
             }
         }
 
         stage('Gracefully Stop Spring Boot App') {
             steps {
-                pipeline1.stop_app()
+                stopApplication()
             }
         }
     }
 
     post {
         always {
-            pipeline1.clean_app() 
-		}
+            cleanup()
+        }
     }
 }
